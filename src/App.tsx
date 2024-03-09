@@ -1,4 +1,4 @@
-import React from "react";
+
 import TranslateInput from "./components/Translate Input";
 import TranslateOutput from "./components/Translate Output";
 
