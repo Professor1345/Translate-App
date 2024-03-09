@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .translate-input,
+  .translate-output {
+    @apply text-white;
+    @apply rounded-2xl;
+    @apply w-[45%] p-5 m-2;
+    @apply border border-[#4D5562] border-solid;
+    /* @apply bg-opacity-20; */
+  }
+  .translate-input {
+    @apply bg-[#212936cc];
+  }
+
+  .translate-output {
+    @apply bg-[#121826cc];
+  }
+}
