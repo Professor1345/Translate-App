@@ -8,15 +8,23 @@
   .translate-output {
     @apply text-white;
     @apply rounded-2xl;
-    @apply w-[90%] lg:w-[45%] p-7 xl:p-9 m-2;
+    @apply w-[90%] lg:w-[45%] py-4 sm:py-3 md:py-3 lg:py-4 px-4  lg:px-6 2xl:p-9 m-2;
     @apply border border-[#4D5562] border-solid;
+    @apply text-[13px] sm:text-sm md:text-base lg:text-base;
+    /* @apply min-h-[350px]; */
     /* @apply bg-opacity-20; */
   }
   .translate-input {
-    @apply bg-[#212936cc];
+    @apply bg-[#212936cc] lg:self-stretch;
   }
+  /* .translate-input header select:nth-child(4) {
+    @apply selected;
+  } */
 
   .translate-output {
-    @apply bg-[#121826cc];
+    @apply bg-[#121826cc] lg:self-stretch;
+  }
+  .translate-output header button:first-child {
+    @apply hidden;
   }
 }
