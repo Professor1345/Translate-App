@@ -7,8 +7,6 @@ import UserContext from "../UserContext";
 const TranslateInput: React.FC = () => {
   // const [buttonLang, setButtonLang] = useState(Language);
   const [active, setActive] = useState<string>("English");
-  
-
 
   const {
     inputValue,
@@ -17,11 +15,16 @@ const TranslateInput: React.FC = () => {
     setLangFrom,
     setOutputValue,
     data,
-    error
-  }  = useContext(UserContext) || {};
+    error,
+  } = useContext(UserContext) || {};
 
-  if (!inputValue || !setOutputValue || !langFrom || !setLangFrom || !setInputValue) {
-    
+  if (
+    !inputValue ||
+    !setOutputValue ||
+    !langFrom ||
+    !setLangFrom ||
+    !setInputValue
+  ) {
     throw new Error("imported values are not available in UserContext");
   }
   // if (!UserContext) {
@@ -44,22 +47,25 @@ const TranslateInput: React.FC = () => {
       if (voices.length > 0) {
         utterance.voice = voices[2];
       } else {
-        alert("No voices available")
+        alert("No voices available");
       }
 
       synthesis.speak(utterance);
     }
   };
 
-  
-
   const langFromCopy = () => {
-    const text = inputValue || "";
+    const text = inputValue;
     // text.select();
     // text.setSelectionRange(0,500);
     navigator.clipboard.writeText(text);
     alert("Copied: " + text);
   };
+
+  const inputHandler = (e: { target: { value: string } }) => {
+    setInputValue(e.target.value.length >= 1 ? e.target.value : " ");
+  };
+
   // const [selectedOption, setSelectedOption] = useState("English");
   return (
     <div className="translate-input flex flex-col justify-between">
@@ -167,13 +173,13 @@ const TranslateInput: React.FC = () => {
         <hr className="border-[#4D5562] my-2 sm:my-1" />
         <section className="mt-5">
           <textarea
-            id=""
+            id="text"
             cols={50}
             rows={8}
             maxLength={500}
-            value={inputValue || ""}
+            value={inputValue}
             className="w-full h-full bg-transparent focus:outline-none resize-none"
-            onChange={(e) => setInputValue(e.target.value)}
+            onChange={inputHandler}
           ></textarea>
           <div className="flex justify-end text-[#4D5562] my-1">
             <span>{inputValue.length}</span>/500
@@ -197,6 +203,7 @@ const TranslateInput: React.FC = () => {
         </div>
         <div
           onClick={() => {
+            // setInputValue(inputValue.trimStart().length >= 1? inputValue.trimStart() : " ");
             setOutputValue(data || error);
             console.log(data || error);
           }}

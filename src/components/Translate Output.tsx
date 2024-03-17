@@ -168,7 +168,7 @@ const TranslateOutput = () => {
         <hr className="border-[#4D5562] my-2 sm:my-1" />
         <section className="mt-5 ">
           <textarea
-            id=""
+            id="text"
             cols={50}
             rows={10}
             value={outputValue || ""}
@@ -178,8 +178,8 @@ const TranslateOutput = () => {
           ></textarea>
         </section>
       </div>
-      <div onClick={langToSound} className="flex flex-row">
-        <button className="p-[6px] border-[3px] mr-2 rounded-xl border-[#4D5562] border-solid">
+      <div  className="flex flex-row">
+        <button onClick={langToSound} className="p-[6px] border-[3px] mr-2 rounded-xl border-[#4D5562] border-solid">
           <img src={SoundMaxFill} alt="Sound" className="size-full" />
         </button>
         <button
