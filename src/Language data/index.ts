@@ -1,5 +1,5 @@
 export const Language = [
-  { lang: "Detect Language", langCode: "" },
+  { lang: "Detect Language", langCode: "auto" },
   { lang: "English", langCode: "en" },
   { lang: "French", langCode: "fr" },
 
