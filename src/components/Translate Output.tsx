@@ -11,13 +11,17 @@ import UserContext from "../UserContext";
 
 const TranslateOutput = () => {
   // const [buttonLang, setButtonLang] = useState(Language);
-  const [active, setActive] = useState("French");
+  const [active, setActive] = useState<string>("French");
 
-  const [otherLangs, setOtherLangs] = useState("Spanish");
-  const [otherLangsToggle, setOtherLangsToggle] = useState(false);
+  const [otherLangs, setOtherLangs] = useState<string>("Spanish");
+  const [otherLangsToggle, setOtherLangsToggle] = useState<boolean>(false);
 
   const { langTo, setLangTo, outputValue, setOutputValue } =
-    useContext(UserContext);
+    useContext(UserContext) || {};
+
+    if (!setLangTo || !setOutputValue) {
+      throw new Error("imported values are not available in UserContext");
+    }
   useEffect(() => {
     console.log(langTo);
   }, [langTo]);
@@ -35,7 +39,7 @@ const TranslateOutput = () => {
       // }
 
       const voices = synthesis.getVoices();
-    const selectedVoice = voices.find(voice => voice.lang.includes(langTo)); // Find the voice that matches the language code
+    const selectedVoice = voices.find(voice => voice.lang.includes(langTo || "")); // Find the voice that matches the language code
     if (selectedVoice) {
       utterance.voice = selectedVoice;
     } else {
@@ -48,7 +52,7 @@ const TranslateOutput = () => {
   };
 
   const langToCopy = () => {
-    const text = outputValue;
+    const text = outputValue || "";
     navigator.clipboard.writeText(text);
     alert("Copied: " + text);
   };

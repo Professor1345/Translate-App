@@ -7,6 +7,9 @@ import UserContext from "../UserContext";
 const TranslateInput: React.FC = () => {
   // const [buttonLang, setButtonLang] = useState(Language);
   const [active, setActive] = useState<string>("English");
+  
+
+
   const {
     inputValue,
     setInputValue,
@@ -14,8 +17,17 @@ const TranslateInput: React.FC = () => {
     setLangFrom,
     setOutputValue,
     data,
-    error,
-  } = useContext(UserContext);
+    error
+  }  = useContext(UserContext) || {};
+
+  if (!inputValue || !setOutputValue || !langFrom || !setLangFrom || !setInputValue) {
+    
+    throw new Error("imported values are not available in UserContext");
+  }
+  // if (!UserContext) {
+  //   // Handle the case when context is not available
+  //   return <div>Context not available</div>;
+  // }
 
   const [otherLangs, setOtherLangs] = useState<string>("Spanish");
   const [otherLangsToggle, setOtherLangsToggle] = useState<boolean>(false);
@@ -42,7 +54,7 @@ const TranslateInput: React.FC = () => {
   
 
   const langFromCopy = () => {
-    const text = inputValue;
+    const text = inputValue || "";
     // text.select();
     // text.setSelectionRange(0,500);
     navigator.clipboard.writeText(text);

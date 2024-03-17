@@ -4,21 +4,24 @@ import useFetch from "./Language data/useFetch";
 import UserContext from "./UserContext";
 import { useEffect, useState } from "react";
 
-const App = () => {
+const App: React.FC = () => {
   // TranslateInput
-  const [inputValue, setInputValue] = useState("Hello, how are you?");
+  const [inputValue, setInputValue] = useState<string>("Hello, how are you?");
   // const [noSpaceInputValue, setNoSpaceInputValue] = useState("");
   // useEffect(() => {
   //   setNoSpaceInputValue(inputValue.replace(" ", "%20"));
   // }, [inputValue]);
-  const [langFrom, setLangFrom] = useState("en");
+  const [langFrom, setLangFrom] = useState<string>("en");
 
   //TranslateOutput
-  const [langTo, setLangTo] = useState("fr");
-  const [outputValue, setOutputValue] = useState("Bonjour, comment vas-tu?");
+  const [langTo, setLangTo] = useState<string>("fr");
+  const [outputValue, setOutputValue] = useState<string>(
+    "Bonjour, comment vas-tu?"
+  );
 
   // API
-  const { data, error } = useFetch(
+  
+  const APIData = useFetch(
     (
       "https://api.mymemory.translated.net/get?q=" +
       inputValue +
@@ -26,10 +29,10 @@ const App = () => {
       langFrom +
       "|" +
       langTo
-    ).toString()
+    )
   );
 
-  
+  const { data , error } = APIData;
 
   useEffect(() => {
     console.log(
