@@ -8,6 +8,8 @@ import {
   SoundMaxFill,
 } from "../assets/images";
 import UserContext from "../UserContext";
+import useClipboard from "react-use-clipboard";
+// import { useSpeechSynthesis } from "react-speech-kit";
 
 const TranslateOutput = () => {
   // const [buttonLang, setButtonLang] = useState(Language);
@@ -19,51 +21,61 @@ const TranslateOutput = () => {
   const { langTo, setLangTo, outputValue, setOutputValue } =
     useContext(UserContext) || {};
 
-    if (!setLangTo || !setOutputValue) {
-      throw new Error("imported values are not available in UserContext");
-    }
+  if (!setLangTo || !setOutputValue) {
+    throw new Error("imported values are not available in UserContext");
+  }
   useEffect(() => {
     console.log(langTo);
   }, [langTo]);
   // const [selectedOption, setSelectedOption] = useState("English");
-  const langToSound = () => {
-    if ("speechSynthesis" in window) {
-      const synthesis = window.speechSynthesis;
-      const utterance = new SpeechSynthesisUtterance(outputValue);
 
-      // const voices = synthesis.getVoices();
-      // if (voices.length > 0) {
-      //   utterance.voice = voices[2];
-      // } else {
-      //   alert("No voices available")
-      // }
+  //Window Speech
+  // const langToSound = () => {
+  //   if ("speechSynthesis" in window) {
+  //     const synthesis = window.speechSynthesis;
+  //     const utterance = new SpeechSynthesisUtterance(outputValue);
 
-      const voices = synthesis.getVoices();
-    const selectedVoice = voices.find(voice => voice.lang.includes(langTo || "")); // Find the voice that matches the language code
-    if (selectedVoice) {
-      utterance.voice = selectedVoice;
-    } else {
-      alert("No voice available for the selected language");
-    }
-      // console.log(utterance);
-      // utterance.lang = langTo;
-      synthesis.speak(utterance);
-    }
-  };
+  //     // const voices = synthesis.getVoices();
+  //     // if (voices.length > 0) {
+  //     //   utterance.voice = voices[2];
+  //     // } else {
+  //     //   alert("No voices available")
+  //     // }
 
+  //     const voices = synthesis.getVoices();
+  //   const selectedVoice = voices.find(voice => voice.lang.includes(langTo || "")); // Find the voice that matches the language code
+  //   if (selectedVoice) {
+  //     utterance.voice = selectedVoice;
+  //   } else {
+  //     alert("No voice available for the selected language");
+  //   }
+  //     // console.log(utterance);
+  //     // utterance.lang = langTo;
+  //     synthesis.speak(utterance);
+  //   }
+  // };
+  // const { speak } = useS
+  const langToSound = () => {};
+
+  // const langToCopy = () => {
+  //   const text = outputValue || "";
+
+  //   if (navigator.clipboard) {
+  //     navigator.clipboard.writeText(text);
+  //   } else {
+  //     const textArea = document.createElement("textarea");
+  //     textArea.value = text;
+  //     document.body.appendChild(textArea);
+  //     textArea.select();
+  //     document.execCommand("copy");
+  //     document.body.removeChild(textArea);
+  //   }
+  //   alert("Copied: " + text);
+  // };
+  const text = outputValue || "";
+  const [, setCopied] = useClipboard(text);
   const langToCopy = () => {
-    const text = outputValue || "";
-    
-    if(navigator.clipboard){
-    navigator.clipboard.writeText(text);}
-    else {
-      const textArea = document.createElement('textarea');
-      textArea.value = text;
-      document.body.appendChild(textArea);
-      textArea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textArea);
-    }
+    setCopied;
     alert("Copied: " + text);
   };
   return (
@@ -188,8 +200,11 @@ const TranslateOutput = () => {
           ></textarea>
         </section>
       </div>
-      <div  className="flex flex-row">
-        <button onClick={langToSound} className="p-[6px] border-[3px] mr-2 rounded-xl border-[#4D5562] border-solid">
+      <div className="flex flex-row">
+        <button
+          onClick={langToSound}
+          className="p-[6px] border-[3px] mr-2 rounded-xl border-[#4D5562] border-solid"
+        >
           <img src={SoundMaxFill} alt="Sound" className="size-full" />
         </button>
         <button
