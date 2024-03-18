@@ -1,9 +1,8 @@
 // import { useState } from "react";
-import { useContext,  useState } from "react";
+import { useContext, useState } from "react";
 import { Language } from "../Language data";
 import { Copy, ExpandDown, SoundMaxFill } from "../assets/images";
 import UserContext from "../UserContext";
-
 
 const TranslateInput: React.FC = () => {
   // const [buttonLang, setButtonLang] = useState(Language);
@@ -80,7 +79,6 @@ const TranslateInput: React.FC = () => {
   };
   // const axios = require('axios');
 
-  
   // const [selectedOption, setSelectedOption] = useState("English");
   return (
     <div className="translate-input flex flex-col justify-between">
@@ -99,8 +97,13 @@ const TranslateInput: React.FC = () => {
                 onClick={() => {
                   setActive(language.lang);
                   // console.log(language.langCode);
-                  setLangFrom(language.lang === "Detect Language"? langDetect : language.langCode);
-                  console.log(langFrom.trim())
+                  setLangFrom(
+                    language.lang === "Detect Language"
+                      ? langDetect
+                      : language.langCode
+                  );
+                  // console.log(langFrom.trim())
+                  setOtherLangsToggle(() => false);
                 }}
               >
                 {language.lang}

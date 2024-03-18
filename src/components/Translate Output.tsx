@@ -29,32 +29,32 @@ const TranslateOutput = () => {
   // const [selectedOption, setSelectedOption] = useState("English");
 
   //Window Speech
-  // const langToSound = () => {
-  //   if ("speechSynthesis" in window) {
-  //     const synthesis = window.speechSynthesis;
-  //     const utterance = new SpeechSynthesisUtterance(outputValue);
+  const langToSound = () => {
+    if ("speechSynthesis" in window) {
+      const synthesis = window.speechSynthesis;
+      const utterance = new SpeechSynthesisUtterance(outputValue);
 
-  //     // const voices = synthesis.getVoices();
-  //     // if (voices.length > 0) {
-  //     //   utterance.voice = voices[2];
-  //     // } else {
-  //     //   alert("No voices available")
-  //     // }
+      // const voices = synthesis.getVoices();
+      // if (voices.length > 0) {
+      //   utterance.voice = voices[2];
+      // } else {
+      //   alert("No voices available")
+      // }
 
-  //     const voices = synthesis.getVoices();
-  //   const selectedVoice = voices.find(voice => voice.lang.includes(langTo || "")); // Find the voice that matches the language code
-  //   if (selectedVoice) {
-  //     utterance.voice = selectedVoice;
-  //   } else {
-  //     alert("No voice available for the selected language");
-  //   }
-  //     // console.log(utterance);
-  //     // utterance.lang = langTo;
-  //     synthesis.speak(utterance);
-  //   }
-  // };
+      const voices = synthesis.getVoices();
+    const selectedVoice = voices.find(voice => voice.lang.includes(langTo || "")); // Find the voice that matches the language code
+    if (selectedVoice) {
+      utterance.voice = selectedVoice;
+    } else {
+      alert("No voice available for the selected language");
+    }
+      // console.log(utterance);
+      // utterance.lang = langTo;
+      synthesis.speak(utterance);
+    }
+  };
   // const { speak } = useS
-  const langToSound = () => {};
+  // const langToSound = () => {};
 
   // const langToCopy = () => {
   //   const text = outputValue || "";
