@@ -45,7 +45,7 @@ const TranslateOutput = () => {
     } else {
       alert("No voice available for the selected language");
     }
-      console.log(utterance);
+      // console.log(utterance);
       // utterance.lang = langTo;
       synthesis.speak(utterance);
     }
