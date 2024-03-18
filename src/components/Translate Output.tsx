@@ -103,6 +103,7 @@ const TranslateOutput = () => {
                     setActive(language.lang);
                     // console.log(langTo);
                     setLangTo(language.langCode);
+                    setOtherLangsToggle(() => false);
                   }}
                 >
                   {language.lang}
