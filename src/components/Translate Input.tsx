@@ -1,8 +1,9 @@
 // import { useState } from "react";
-import { useContext, useEffect, useState } from "react";
+import { useContext,  useState } from "react";
 import { Language } from "../Language data";
 import { Copy, ExpandDown, SoundMaxFill } from "../assets/images";
 import UserContext from "../UserContext";
+
 
 const TranslateInput: React.FC = () => {
   // const [buttonLang, setButtonLang] = useState(Language);
@@ -11,6 +12,8 @@ const TranslateInput: React.FC = () => {
   const {
     inputValue,
     setInputValue,
+    langDetect,
+    setLangDetect,
     langFrom,
     setLangFrom,
     setOutputValue,
@@ -21,6 +24,8 @@ const TranslateInput: React.FC = () => {
   if (
     !inputValue ||
     !setOutputValue ||
+    !langDetect ||
+    !setLangDetect ||
     !langFrom ||
     !setLangFrom ||
     !setInputValue
@@ -34,9 +39,9 @@ const TranslateInput: React.FC = () => {
 
   const [otherLangs, setOtherLangs] = useState<string>("Spanish");
   const [otherLangsToggle, setOtherLangsToggle] = useState<boolean>(false);
-  useEffect(() => {
-    console.log(langFrom);
-  }, [langFrom]);
+  // useEffect(() => {
+  //   console.log(langFrom);
+  // }, [langFrom]);
 
   const langFromSound = () => {
     if ("speechSynthesis" in window) {
@@ -63,7 +68,7 @@ const TranslateInput: React.FC = () => {
       .then(() => {
         alert("Copied: " + text);
       })
-      .catch(error => {
+      .catch((error) => {
         alert("Error copying: " + error);
       });
   };
@@ -73,7 +78,9 @@ const TranslateInput: React.FC = () => {
       e.target.value.trim().length >= 1 ? e.target.value.trimStart() : " "
     );
   };
+  // const axios = require('axios');
 
+  
   // const [selectedOption, setSelectedOption] = useState("English");
   return (
     <div className="translate-input flex flex-col justify-between">
@@ -92,7 +99,8 @@ const TranslateInput: React.FC = () => {
                 onClick={() => {
                   setActive(language.lang);
                   // console.log(language.langCode);
-                  setLangFrom(language.langCode);
+                  setLangFrom(language.lang === "Detect Language"? langDetect : language.langCode);
+                  console.log(langFrom.trim())
                 }}
               >
                 {language.lang}
@@ -214,7 +222,7 @@ const TranslateInput: React.FC = () => {
             // setInputValue(inputValue.trimStart().length >= 1? inputValue.trimStart() : " ");
             inputValue.trim() === "" ? alert("Please add input") : null;
             setOutputValue(data || error);
-            console.log(data || error);
+            // console.log(data || error);
           }}
         >
           <button className=" py-2 px-4 md:px-5 bg-[#3662E3] rounded-[12px] border border-[#CDD5E0] border-solid">

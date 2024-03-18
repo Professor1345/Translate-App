@@ -4,6 +4,8 @@ import { createContext } from "react";
 interface UserContextValue {
   inputValue: string;
   setInputValue: (value : string) => void;
+  langDetect : any; 
+  setLangDetect: (value : any) => void;
   langFrom: string;
   setLangFrom: (value : string) => void;
   langTo: string;
