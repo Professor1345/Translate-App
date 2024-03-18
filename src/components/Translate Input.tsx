@@ -58,12 +58,20 @@ const TranslateInput: React.FC = () => {
     const text = inputValue;
     // text.select();
     // text.setSelectionRange(0,500);
-    navigator.clipboard.writeText(text);
-    alert("Copied: " + text);
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        alert("Copied: " + text);
+      })
+      .catch(error => {
+        alert("Error copying: " + error);
+      });
   };
 
   const inputHandler = (e: { target: { value: string } }) => {
-    setInputValue(e.target.value.length >= 1 ? e.target.value : " ");
+    setInputValue(
+      e.target.value.trim().length >= 1 ? e.target.value.trimStart() : " "
+    );
   };
 
   // const [selectedOption, setSelectedOption] = useState("English");
@@ -204,6 +212,7 @@ const TranslateInput: React.FC = () => {
         <div
           onClick={() => {
             // setInputValue(inputValue.trimStart().length >= 1? inputValue.trimStart() : " ");
+            inputValue.trim() === "" ? alert("Please add input") : null;
             setOutputValue(data || error);
             console.log(data || error);
           }}

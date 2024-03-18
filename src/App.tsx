@@ -20,19 +20,17 @@ const App: React.FC = () => {
   );
 
   // API
-  
+
   const APIData = useFetch(
-    (
-      "https://api.mymemory.translated.net/get?q=" +
+    "https://api.mymemory.translated.net/get?q=" +
       inputValue +
       "&langpair=" +
       langFrom +
       "|" +
       langTo
-    )
   );
 
-  const { data , error } = APIData;
+  const { data, error } = APIData;
 
   useEffect(() => {
     console.log(
@@ -71,6 +69,7 @@ const App: React.FC = () => {
         <div className="text-white my-3">
           Developed by{" "}
           <a
+            target="_blank"
             href="https://hammedbello.netlify.app/"
             className="underline hover:text-gray-400"
           >
