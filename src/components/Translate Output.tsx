@@ -8,7 +8,6 @@ import {
   SoundMaxFill,
 } from "../assets/images";
 import UserContext from "../UserContext";
-import useClipboard from "react-use-clipboard";
 // import { useSpeechSynthesis } from "react-speech-kit";
 
 const TranslateOutput = () => {
@@ -72,11 +71,18 @@ const TranslateOutput = () => {
   //   }
   //   alert("Copied: " + text);
   // };
-  const text = outputValue || "";
-  const [, setCopied] = useClipboard(text);
+  
+  
   const langToCopy = () => {
-    setCopied;
-    alert("Copied: " + text);
+    const text = outputValue || "";
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        alert("Copied: " + text);
+      })
+      .catch(error => {
+        alert("Error copying: " + error);
+      });
   };
   return (
     <div className="translate-output flex flex-col justify-between">
